@@ -7,4 +7,6 @@ class MyColors {
   static const Color internationalKleinBlue = Color.fromARGB(255, 3, 44, 166);
   static const Color royalBlueDark = Color.fromARGB(255, 0, 5, 30);
   static const Color carolinaBlue = Color.fromARGB(255, 11, 158, 217);
+
+  static const Color blueDarkAlpha25 = Color.fromARGB(100, 0, 5, 30);
 }
