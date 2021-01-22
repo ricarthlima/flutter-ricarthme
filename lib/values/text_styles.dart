@@ -6,5 +6,5 @@ class MyTextStyles {
   TextStyle heading2 = TextStyle(color: Colors.white, fontSize: 34);
   TextStyle heading3 = TextStyle(color: Colors.white, fontSize: 26);
   TextStyle subHeadingPink =
-      TextStyle(color: MyColors.brilliantRose, fontSize: 20);
+      TextStyle(color: MyColors.brilliantRose, fontSize: 18);
 }

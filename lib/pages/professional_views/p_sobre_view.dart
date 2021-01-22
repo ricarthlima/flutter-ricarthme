@@ -13,7 +13,7 @@ class _SobreViewState extends State<SobreView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 50),
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
       width: getWidth(context),
       height: getHeight(context),
       decoration: BoxDecoration(
@@ -57,10 +57,32 @@ class _SobreViewState extends State<SobreView> {
                   ? EdgeInsets.only(right: getWidth(context) * 0.4)
                   : EdgeInsets.only(right: 0),
               child: Text(
-                "Olá! Sou estudante de Sistemas de Informação no Centro de Informática da Universidade Federal de Pernambuco " +
-                    "(CIn-UFPE). Desde muito jovem me interesso por computadores e coisas que podemos fazer com eles. Fiz cursos " +
-                    "profissionalizantes na área ainda na minha infância que, apesar de hoje serem conhecimentos ultrapassados, " +
-                    "serviram como minha inspiração para seguir os caminhos que trilhei.",
+                "Olá! \n" +
+                    "\n" +
+                    "Sou programador há mais de 10 anos já tendo atuado com várias tecnologias.\n" +
+                    "\n" +
+                    "Foi no Ensino Médio do Colégio de Aplicação - UFPE que desenvolvi junto com " +
+                    "minha equipe meu primeiro sistema que seria usado na prática, o LactoRun (20" +
+                    "13~) que consiste em uma ferramenta digital para obtenção da Máxima Fase Est" +
+                    "ável de Lactato por meios não invasivos. Nesse projeto já usei Programação V" +
+                    "isual (MIT App Inventor), Java para Windows, Android com Java e Ruby com Rai" +
+                    "ls.\n" +
+                    "\n" +
+                    "Em 2017 ingressei no curso de Sistemas de Informação na Universidade Federal" +
+                    " de Pernambuco onde descobri que além da vontade de desenvolver eu gostava t" +
+                    "ambém de ensinar. Além de muitas monitorias, aulas particulares e participaç" +
+                    "ões em feiras, o principal “output” dessa vontade é o canal no YouTube (Dotc" +
+                    "ode) que onde lanço vídeos educativos de computação semanalmente, junto com " +
+                    "meu amigo e sócio @warleysoares. \n" +
+                    "\n" +
+                    "Na primeira metade do ano de 2019 me aventurei no meu primeiro emprego como " +
+                    "estagiário de Desenvolvimento Web Full Stack na Serttel. Foi uma experiência" +
+                    " incrível de aprendizado. Tive que aprender novas tecnologias como Angular 7" +
+                    " (HTML, CSS, Bootstrap, Typescript) para o front, e Spring Boot (Java, JPA, " +
+                    "Hibernate) para o back. \n" +
+                    "\n" +
+                    "Em 2020 me dediquei à tecnologia na qual esse site é construído e que eu sou" +
+                    " apaixonado: o Flutter. \n",
                 style: TextStyle(
                   color: Colors.white,
                 ),

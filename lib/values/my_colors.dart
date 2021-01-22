@@ -8,5 +8,5 @@ class MyColors {
   static const Color royalBlueDark = Color.fromARGB(255, 0, 5, 30);
   static const Color carolinaBlue = Color.fromARGB(255, 11, 158, 217);
 
-  static const Color blueDarkAlpha25 = Color.fromARGB(100, 0, 5, 30);
+  static const Color blueDarkAlpha25 = Color.fromARGB(127, 0, 5, 30);
 }

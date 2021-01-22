@@ -14,7 +14,7 @@ class _HomeViewState extends State<HomeView> {
     return Center(
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: (getWidth(context) < 500) ? 25 : 75,
+          horizontal: (getWidth(context) < 630) ? 20 : 75,
         ),
         width: getWidth(context),
         height: getHeight(context),
