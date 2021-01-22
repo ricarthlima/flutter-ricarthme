@@ -7,4 +7,6 @@ class MyTextStyles {
   TextStyle heading3 = TextStyle(color: Colors.white, fontSize: 26);
   TextStyle subHeadingPink =
       TextStyle(color: MyColors.brilliantRose, fontSize: 18);
+
+  TextStyle appBarButton = TextStyle(color: Colors.white);
 }

@@ -10208,8 +10208,8 @@ c8=p}c9=r?P.bN(31,255,255,255):P.bN(31,0,0,0)
 d0=r?P.bN(10,255,255,255):P.bN(10,0,0,0)
 d1=M.a6G(!1,c8,a5,d6,c9,36,d6,d0,C.rr,c7,88,d6,d6,d6,C.kI)
 d2=r?C.te:C.td
-d3=r?C.o_:C.tg
-d4=r?C.o_:C.th
+d3=r?C.o_:C.tf
+d4=r?C.o_:C.tg
 p=c4.y
 p.toString
 d5=K.a6K(a5.cx,p,o)
@@ -48526,9 +48526,9 @@ m=X.a0c(m,C.nA,new L.kT("assets/flutter_me.png"))
 s=M.a1Y(C.uj,C.bD,H.d(["Sobre"],t.i),C.aR,Z.lG().b)
 r=L.mr("Ricarth Lima",A.eM(q,q,C.kN,q,q,q,q,q,q,q,q,26,q,C.eN,q,q,!0,q,q,q,q,q,q),C.kp)
 p=b.Z(p).f.a.a>1000?new V.b0(0,0,b.Z(p).f.a.a*0.4,0):new V.b0(0,0,0,0)
-p=H.d([s,r,M.l6(q,L.mr("Ol\xe1! Sou estudante de Sistemas de Informa\xe7\xe3o no Centro de Inform\xe1tica da Universidade Federal de Pernambuco (CIn-UFPE). Desde muito jovem me interesso por computadores e coisas que podemos fazer com eles. Fiz cursos profissionalizantes na \xe1rea ainda na minha inf\xe2ncia que, apesar de hoje serem conhecimentos ultrapassados, serviram como minha inspira\xe7\xe3o para seguir os caminhos que trilhei.",A.eM(q,q,C.j,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q),C.mW),C.tf,q,q,q,p,q,q)],t.fQ)
+p=H.d([s,r,M.l6(q,L.mr("Ol\xe1! \n\nSou programador h\xe1 mais de 10 anos j\xe1 tendo atuado com v\xe1rias tecnologias.\n\nFoi no Ensino M\xe9dio do Col\xe9gio de Aplica\xe7\xe3o - UFPE que desenvolvi junto com minha equipe meu primeiro sistema que seria usado na pr\xe1tica, o LactoRun (2013~) que consiste em uma ferramenta digital para obten\xe7\xe3o da M\xe1xima Fase Est\xe1vel de Lactato por meios n\xe3o invasivos. Nesse projeto j\xe1 usei Programa\xe7\xe3o Visual (MIT App Inventor), Java para Windows, Android com Java e Ruby com Rails.\n\nEm 2017 ingressei no curso de Sistemas de Informa\xe7\xe3o na Universidade Federal de Pernambuco onde descobri que al\xe9m da vontade de desenvolver eu gostava tamb\xe9m de ensinar. Al\xe9m de muitas monitorias, aulas particulares e participa\xe7\xf5es em feiras, o principal \u201coutput\u201d dessa vontade \xe9 o canal no YouTube (Dotcode) que onde lan\xe7o v\xeddeos educativos de computa\xe7\xe3o semanalmente, junto com meu amigo e s\xf3cio @warleysoares. \n\nNa primeira metade do ano de 2019 me aventurei no meu primeiro emprego como estagi\xe1rio de Desenvolvimento Web Full Stack na Serttel. Foi uma experi\xeancia incr\xedvel de aprendizado. Tive que aprender novas tecnologias como Angular 7 (HTML, CSS, Bootstrap, Typescript) para o front, e Spring Boot (Java, JPA, Hibernate) para o back. \n\nEm 2020 me dediquei \xe0 tecnologia na qual esse site \xe9 constru\xeddo e que eu sou apaixonado: o Flutter. \n",A.eM(q,q,C.j,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q),C.mW),C.th,q,q,q,p,q,q)],t.fQ)
 r=P.aK([null,0],t.st,t.S)
-return M.l6(q,T.vm(new B.x0(new G.R6(!0,!0,!0,p,r),q,C.l,!1,q,!0,C.qH,!0,q,3,C.aV,C.wM,q,C.bC,q),q,q),q,q,new S.eb(q,m,q,q,q,q,C.ab),n.a.b,q,new V.b0(50,0,50,0),o.a.a)}}
+return M.l6(q,T.vm(new B.x0(new G.R6(!0,!0,!0,p,r),q,C.l,!1,q,!0,C.qH,!0,q,3,C.aV,C.wM,q,C.bC,q),q,q),q,q,new S.eb(q,m,q,q,q,q,C.ab),n.a.b,q,new V.b0(50,50,50,50),o.a.a)}}
 Z.Mk.prototype={}
 E.hD.prototype={
 gk:function(a){return this.b},
@@ -50654,9 +50654,9 @@ C.o_=new P.F(1087163596)
 C.td=new P.F(1627389952)
 C.te=new P.F(1660944383)
 C.o0=new P.F(16777215)
-C.tf=new P.F(1677722910)
-C.tg=new P.F(1723645116)
-C.th=new P.F(1724434632)
+C.tf=new P.F(1723645116)
+C.tg=new P.F(1724434632)
+C.th=new P.F(2130707742)
 C.G=new P.F(2315255808)
 C.ti=new P.F(2583691263)
 C.H=new P.F(3019898879)

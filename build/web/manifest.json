@@ -1,11 +1,11 @@
 {
-    "name": "ricarth_flutter",
-    "short_name": "ricarth_flutter",
+    "name": "Ricarth Lima",
+    "short_name": "ricarth.me",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": " Ricarth é um desenvolvedor de softwares e educador. Sua principal tecnologia atualmente é o Flutter. Você pode encontrar mais sobre ele no seu canal Dotcode.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
