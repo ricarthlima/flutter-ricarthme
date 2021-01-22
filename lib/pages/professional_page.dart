@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:ricarth_flutter/appbar.dart';
+import 'package:ricarth_flutter/pages/professional_views/appbar.dart';
+import 'package:ricarth_flutter/pages/professional_views/drawer.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
-import 'package:ricarth_flutter/values/text_styles.dart';
 
 import 'professional_views/p_home_view.dart';
 import 'professional_views/p_sobre_view.dart';
@@ -16,10 +16,12 @@ class ProfessionalPage extends StatefulWidget {
 class _ProfessionalPageState extends State<ProfessionalPage> {
   int controller = 0;
   CarouselController buttonCarouselController = CarouselController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: MyColors.royalBlueDark,
       body: Stack(
         children: [
@@ -32,12 +34,16 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
               enableInfiniteScroll: false,
               enlargeCenterPage: true,
               viewportFraction: 1,
+              scrollDirection: Axis.horizontal,
             ),
           ),
-          getNonAppBar(context, buttonCarouselController),
+          getNonAppBar(
+            context,
+            buttonCarouselController,
+            _scaffoldKey,
+          ),
         ],
       ),
-      //,
       floatingActionButton: FloatingActionButton(
         backgroundColor: MyColors.brilliantRose,
         onPressed: () {
@@ -46,6 +52,10 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
           });
         },
         child: Icon(Icons.navigate_next),
+      ),
+      drawer: getHomeDrawer(
+        context: context,
+        carouselController: buttonCarouselController,
       ),
     );
   }
