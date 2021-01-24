@@ -66,7 +66,7 @@ Widget getNonAppBar(
               ),
               FlatButton(
                 onPressed: () {
-                  carouselController.animateToPage(3);
+                  carouselController.animateToPage(4);
                 },
                 child: Text(
                   "Contato",

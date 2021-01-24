@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
@@ -35,14 +38,17 @@ class _ServiceItemState extends State<ServiceItem> {
           Padding(
             padding: EdgeInsets.only(bottom: 18),
           ),
-          Text(
-            widget.title,
-            style: TextStyle(
+          TypewriterAnimatedTextKit(
+            text: [widget.title],
+            textStyle: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
             textAlign: TextAlign.center,
+            repeatForever: false,
+            totalRepeatCount: 1,
+            speed: Duration(milliseconds: 50 + Random().nextInt(100)),
           ),
           Text(
             widget.text,

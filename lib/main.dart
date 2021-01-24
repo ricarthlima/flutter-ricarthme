@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         nextScreen: ProfessionalPage(),
         splash: Image.asset(
           "assets/ricarth.png",
-          width: 128,
+          width: 100,
         ),
         backgroundColor: MyColors.royalBlueDark,
       ),

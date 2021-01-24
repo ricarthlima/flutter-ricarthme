@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/pages/professional_views/appbar.dart';
 import 'package:ricarth_flutter/pages/professional_views/drawer.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
+import 'package:ricarth_flutter/pages/professional_views/p_contact_view.dart';
 import 'package:ricarth_flutter/pages/professional_views/p_services_view.dart';
+import 'package:ricarth_flutter/pages/professional_views/social_medias.dart';
+import 'package:ricarth_flutter/pages/working_page.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
 import 'professional_views/p_home_view.dart';
@@ -27,12 +30,18 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
       body: Stack(
         children: [
           CarouselSlider(
-            items: <Widget>[HomeView(), SobreView(), PServicesView()],
+            items: <Widget>[
+              HomeView(),
+              SobreView(),
+              PServicesView(),
+              WorkingPage(),
+              PContactView(),
+            ],
             carouselController: buttonCarouselController,
             options: CarouselOptions(
               height: getHeight(context),
               autoPlay: false,
-              enableInfiniteScroll: false,
+              enableInfiniteScroll: true,
               enlargeCenterPage: true,
               viewportFraction: 1,
               scrollDirection: Axis.horizontal,
@@ -43,6 +52,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
             buttonCarouselController,
             _scaffoldKey,
           ),
+          getSocialMedia(context),
         ],
       ),
       floatingActionButton: FloatingActionButton(

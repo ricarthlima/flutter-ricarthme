@@ -9,4 +9,5 @@ class MyTextStyles {
       TextStyle(color: MyColors.brilliantRose, fontSize: 18);
 
   TextStyle appBarButton = TextStyle(color: Colors.white);
+  TextStyle commonText = TextStyle(color: Colors.white);
 }
