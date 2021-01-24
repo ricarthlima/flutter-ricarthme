@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/pages/professional_views/appbar.dart';
 import 'package:ricarth_flutter/pages/professional_views/drawer.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
+import 'package:ricarth_flutter/pages/professional_views/p_services_view.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
 import 'professional_views/p_home_view.dart';
@@ -26,7 +27,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
       body: Stack(
         children: [
           CarouselSlider(
-            items: <Widget>[HomeView(), SobreView()],
+            items: <Widget>[HomeView(), SobreView(), PServicesView()],
             carouselController: buttonCarouselController,
             options: CarouselOptions(
               height: getHeight(context),

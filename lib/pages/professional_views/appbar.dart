@@ -47,21 +47,27 @@ Widget getNonAppBar(
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  carouselController.animateToPage(2);
+                },
                 child: Text(
                   "Serviços",
                   style: MyTextStyles().appBarButton,
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  carouselController.animateToPage(3);
+                },
                 child: Text(
                   "Portfólio",
                   style: MyTextStyles().appBarButton,
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  carouselController.animateToPage(3);
+                },
                 child: Text(
                   "Contato",
                   style: MyTextStyles().appBarButton,

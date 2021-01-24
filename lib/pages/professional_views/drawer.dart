@@ -18,6 +18,7 @@ Drawer getHomeDrawer({
                 style: TextStyle(fontSize: 17, color: Colors.white)),
             onTap: () {
               carouselController.animateToPage(0);
+              Navigator.pop(context);
             },
           ),
           ListTile(
@@ -26,25 +27,35 @@ Drawer getHomeDrawer({
                 style: TextStyle(fontSize: 17, color: Colors.white)),
             onTap: () {
               carouselController.animateToPage(1);
+              Navigator.pop(context);
             },
           ),
           ListTile(
             leading: Icon(Icons.navigate_next, color: Colors.white),
             title: Text("Serviço",
                 style: TextStyle(fontSize: 17, color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              carouselController.animateToPage(2);
+              Navigator.pop(context);
+            },
           ),
           ListTile(
             leading: Icon(Icons.navigate_next, color: Colors.white),
             title: Text("Portfólio",
                 style: TextStyle(fontSize: 17, color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              carouselController.animateToPage(3);
+              Navigator.pop(context);
+            },
           ),
           ListTile(
             leading: Icon(Icons.navigate_next, color: Colors.white),
             title: Text("Contato",
                 style: TextStyle(fontSize: 17, color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              carouselController.animateToPage(4);
+              Navigator.pop(context);
+            },
           ),
         ],
       ),

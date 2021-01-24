@@ -14,7 +14,9 @@ class _SobreViewState extends State<SobreView> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: (getWidth(context) > 700) ? 50 : 20, vertical: 50),
+        horizontal: (getWidth(context) > 700) ? 50 : 20,
+        vertical: 75,
+      ),
       width: getWidth(context),
       height: getHeight(context),
       decoration: BoxDecoration(
