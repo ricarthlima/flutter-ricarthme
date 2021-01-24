@@ -9,7 +9,7 @@ class MyColors {
   static const Color royalBlueDark = Color.fromARGB(255, 0, 5, 30);
   static const Color carolinaBlue = Color.fromARGB(255, 11, 158, 217); //#0b9fd9
 
-  static const Color blueDarkAlpha25 = Color.fromARGB(127, 0, 5, 30);
+  static const Color blueDarkAlpha25 = Color.fromARGB(185, 0, 5, 30);
   static const Color white10 = Color.fromARGB(40, 255, 255, 225);
   static const Color white25 = Color.fromARGB(115, 255, 255, 225);
 }

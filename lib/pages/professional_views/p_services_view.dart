@@ -1,6 +1,8 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/pages/professional_views/service_item.dart';
+import 'package:ricarth_flutter/values/text_styles.dart';
 
 class PServicesView extends StatefulWidget {
   @override
@@ -22,6 +24,18 @@ class _PServicesViewState extends State<PServicesView> {
           child: Center(
             child: Column(
               children: [
+                TypewriterAnimatedTextKit(
+                  text: [
+                    "Serviços",
+                  ],
+                  textStyle: MyTextStyles().heading2,
+                  textAlign: TextAlign.start,
+                  speed: const Duration(milliseconds: 200),
+                  pause: const Duration(milliseconds: 2500),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 17),
+                ),
                 Wrap(
                   spacing: 15,
                   runSpacing: 15,
