@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:ricarth_flutter/pages/personal_views/mybooks_view.dart';
 import 'package:ricarth_flutter/pages/professional_page.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: MyColors.royalBlueDark,
       ),
       // home: ProfessionalPage(),
+      routes: {"/books": (context) => MyBooksPage()},
     );
   }
 }
