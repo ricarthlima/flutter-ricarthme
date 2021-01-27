@@ -3,6 +3,103 @@ import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
 List<Book> getListBooks() {
   List<Book> listBook = [
     Book(
+      title: "Você É Inteligente O Bastante Para Trabalhar No Google?",
+      author: "William Poundstone",
+      pages: 292,
+      startedLecture: DateTime.parse("2017-04-14"),
+      daysToFinish: 27,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/71iMfThgGvL.jpg",
+    ),
+    Book(
+      title: "O Monge e o Executivo",
+      author: "James C. Hunter",
+      pages: 144,
+      startedLecture: DateTime.parse("2017-01-04"),
+      daysToFinish: 5,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/51lQ-GKwxrL._SX342_SY445_QL70_ML2_.jpg",
+    ),
+    Book(
+      title: "10 faces da inovação",
+      author: "Allan Pease and Barbara Pease",
+      pages: 280,
+      startedLecture: DateTime.parse("2017-01-11"),
+      daysToFinish: 38,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/41VxbsAta0L._SX346_BO1,204,203,200_.jpg",
+    ),
+    Book(
+      title: "Como conquistar as pessoas",
+      author: "Allan Pease and Barbara Pease",
+      pages: 63,
+      startedLecture: DateTime.parse("2017-06-12"),
+      daysToFinish: 10,
+      urlImage: "https://m.media-amazon.com/images/I/51rDSKTmszL.jpg",
+    ),
+    Book(
+      title: "O Poder do Hábito",
+      author: "Charles Duhigg",
+      pages: 408,
+      startedLecture: DateTime.parse("2017-06-12"),
+      daysToFinish: 42,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/81QPybA6jNL.jpg",
+    ),
+    Book(
+      title: "Pense como um artista",
+      author: "Will Gompertz",
+      pages: 224,
+      startedLecture: DateTime.parse("2017-12-22"),
+      daysToFinish: 18,
+      urlImage: "https://m.media-amazon.com/images/I/51MpVpmdvrL.jpg",
+    ),
+    Book(
+      title: "2001 Uma odisséia no espaço",
+      author: "Arthur C. Clark",
+      pages: 336,
+      startedLecture: DateTime.parse("2018-03-22"),
+      daysToFinish: 29,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/61zLkd00iuL.jpg",
+    ),
+    Book(
+      title: "Cave Mais Fundo",
+      author: "Joshua Harris",
+      pages: 310,
+      startedLecture: DateTime.parse("2018-03-22"),
+      daysToFinish: 29,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/61eHCd1+xAL.jpg",
+    ),
+    Book(
+      title: "De volta ao Mosteiro",
+      author: "James C. Hunter",
+      pages: 192,
+      startedLecture: DateTime.parse("2018-03-22"),
+      daysToFinish: 4,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/81fNwdXUO-L.jpg",
+    ),
+    Book(
+      title: "As Cinco Linguagens do Amor",
+      author: "Gary Chapman",
+      pages: 216,
+      startedLecture: DateTime.parse("2018-05-13"),
+      daysToFinish: 25,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/51zgCvg13TL._SX342_SY445_QL70_ML2_.jpg",
+    ),
+    Book(
+      title: "A Jornada do Escritor",
+      author: "Christopher Vogler",
+      pages: 484,
+      startedLecture: DateTime.parse("2018-08-03"),
+      daysToFinish: 72,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/814LrU4S9ZL.jpg",
+    ),
+    Book(
       title: "O Mistério do 5 Estrelas",
       author: "Marcos Rey",
       pages: 125,

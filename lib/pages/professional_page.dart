@@ -6,7 +6,6 @@ import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/pages/professional_views/p_contact_view.dart';
 import 'package:ricarth_flutter/pages/professional_views/p_services_view.dart';
 import 'package:ricarth_flutter/pages/professional_views/social_medias.dart';
-import 'package:ricarth_flutter/pages/working_page.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
 import 'professional_views/p_home_view.dart';
@@ -34,7 +33,6 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
               HomeView(),
               SobreView(),
               PServicesView(),
-              WorkingPage(),
               PContactView(),
             ],
             carouselController: buttonCarouselController,

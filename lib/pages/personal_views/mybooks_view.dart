@@ -28,11 +28,29 @@ class _MyBooksPageState extends State<MyBooksPage> {
                 vertical: 20,
               ),
         child: SingleChildScrollView(
-          child: Center(
-            child: Wrap(
-              runSpacing: 20,
-              children: _generateWidgets(),
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Entendo a importância do hábito de ler, tanto para construção de um cidadão " +
+                    "contextualizado, quanto para o seu [do cidadão] impacto na melhoria da socie" +
+                    "dade. Venho ano após ano construindo e firmando esse hábito na minha vida. \n" +
+                    "\n" +
+                    "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro " +
+                    "professor meu, Fernando Castor) deixo aqui registrado minhas leituras.\n",
+                textAlign: TextAlign.justify,
+              ),
+              Divider(),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+              ),
+              Center(
+                child: Wrap(
+                  runSpacing: 20,
+                  children: _generateWidgets(),
+                ),
+              ),
+            ],
           ),
         ),
       ),

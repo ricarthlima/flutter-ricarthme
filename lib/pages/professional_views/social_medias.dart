@@ -9,7 +9,7 @@ Widget getSocialMedia(BuildContext context) {
     child: Container(
       alignment: Alignment.center,
       height: 36,
-      width: 180,
+      width: 200,
       decoration: BoxDecoration(
         color: MyColors.white10,
         borderRadius: BorderRadius.circular(25),
@@ -18,6 +18,15 @@ Widget getSocialMedia(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          GestureDetector(
+            onTap: () {
+              _launchURL("https://github.com/ricarthlima");
+            },
+            child: Image.asset(
+              "icon_github.png",
+              width: 24,
+            ),
+          ),
           GestureDetector(
             onTap: () {
               _launchURL("https://twitter.com/ricarthlima");

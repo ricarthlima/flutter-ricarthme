@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Drawer getHomeDrawer({
   @required BuildContext context,
@@ -41,7 +42,7 @@ Drawer getHomeDrawer({
           ),
           ListTile(
             leading: Icon(Icons.navigate_next, color: Colors.white),
-            title: Text("Portfólio",
+            title: Text("Contato",
                 style: TextStyle(fontSize: 17, color: Colors.white)),
             onTap: () {
               carouselController.animateToPage(3);
@@ -49,12 +50,20 @@ Drawer getHomeDrawer({
             },
           ),
           ListTile(
-            leading: Icon(Icons.navigate_next, color: Colors.white),
-            title: Text("Contato",
+            leading: Icon(Icons.outbond, color: Colors.white),
+            title: Text("Portfólio",
                 style: TextStyle(fontSize: 17, color: Colors.white)),
             onTap: () {
-              carouselController.animateToPage(4);
+              launch("http://github.com/ricarthlima");
               Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.outbond, color: Colors.white),
+            title: Text("Leituras",
+                style: TextStyle(fontSize: 17, color: Colors.white)),
+            onTap: () {
+              Navigator.pushNamed(context, "/books");
             },
           ),
         ],

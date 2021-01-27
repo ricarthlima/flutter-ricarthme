@@ -15,16 +15,26 @@ class MyApp extends StatelessWidget {
       title: 'ricarth.me',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: "NotoSans"),
-      home: AnimatedSplashScreen(
-        nextScreen: ProfessionalPage(),
-        splash: Image.asset(
-          "assets/ricarth.png",
-          width: 100,
-        ),
-        backgroundColor: MyColors.royalBlueDark,
-      ),
-      // home: ProfessionalPage(),
-      routes: {"/books": (context) => MyBooksPage()},
+      // home: AnimatedSplashScreen(
+      //   nextScreen: ProfessionalPage(),
+      //   splash: Image.asset(
+      //     "assets/ricarth.png",
+      //     width: 100,
+      //   ),
+      //   backgroundColor: MyColors.royalBlueDark,
+      // ),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => AnimatedSplashScreen(
+              nextScreen: ProfessionalPage(),
+              splash: Image.asset(
+                "assets/ricarth.png",
+                width: 100,
+              ),
+              backgroundColor: MyColors.royalBlueDark,
+            ),
+        "/books": (context) => MyBooksPage()
+      },
     );
   }
 }

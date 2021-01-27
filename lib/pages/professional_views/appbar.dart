@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 import 'package:ricarth_flutter/values/text_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget getDefaultAppBar(BuildContext context) {
   return AppBar(
@@ -60,17 +61,54 @@ Widget getNonAppBar(
                   carouselController.animateToPage(3);
                 },
                 child: Text(
-                  "Portfólio",
+                  "Contato",
                   style: MyTextStyles().appBarButton,
                 ),
               ),
               FlatButton(
                 onPressed: () {
-                  carouselController.animateToPage(4);
+                  launch("http://github.com/ricarthlima");
                 },
-                child: Text(
-                  "Contato",
-                  style: MyTextStyles().appBarButton,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.outbond,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 5),
+                    ),
+                    Text(
+                      "Portfólio",
+                      style: MyTextStyles().appBarButton,
+                    ),
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "/books");
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.outbond,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 5),
+                    ),
+                    Text(
+                      "Leituras",
+                      style: MyTextStyles().appBarButton,
+                    ),
+                  ],
                 ),
               ),
             ],
