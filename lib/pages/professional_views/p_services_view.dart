@@ -15,6 +15,12 @@ class _PServicesViewState extends State<PServicesView> {
     return Container(
       width: getWidth(context),
       height: getHeight(context),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/services.png"),
+          repeat: ImageRepeat.repeat,
+        ),
+      ),
       padding: EdgeInsets.symmetric(
         horizontal: (getWidth(context) > 700) ? 75 : 10,
         vertical: 75,
