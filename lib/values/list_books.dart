@@ -3,6 +3,15 @@ import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
 List<Book> getListBooks() {
   List<Book> listBook = [
     Book(
+      title: "Harry Potter e a Pedra Filosofal",
+      author: "J.K. Rowling",
+      pages: 208,
+      startedLecture: DateTime.parse("2017-02-26"),
+      daysToFinish: 21,
+      urlImage:
+          "https://images-na.ssl-images-amazon.com/images/I/416vIJ9jCOL._SX346_BO1,204,203,200_.jpg",
+    ),
+    Book(
       title: "Você É Inteligente O Bastante Para Trabalhar No Google?",
       author: "William Poundstone",
       pages: 292,
