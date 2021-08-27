@@ -48,14 +48,10 @@ class _HomeViewState extends State<HomeView> {
                   style: MyTextStyles().subHeadingPink,
                 ),
                 TypewriterAnimatedTextKit(
-                  text: ["Kotlin", "Python", "Rails", "Java", "Full Stack"],
+                  text: ["Unity.", "Python.", "Rails.", "Java.", "Full-Stack."],
                   textStyle: MyTextStyles().subHeadingPink,
                   textAlign: TextAlign.start,
                   speed: const Duration(milliseconds: 75),
-                ),
-                Text(
-                  ".",
-                  style: MyTextStyles().subHeadingPink,
                 ),
               ],
             ),

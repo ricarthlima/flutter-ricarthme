@@ -19,15 +19,21 @@ class _SobreViewState extends State<SobreView> {
       ),
       width: getWidth(context),
       height: getHeight(context),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //     image: AssetImage(
+      //       "assets/flutter_me.png",
+      //     ),
+      //     fit: BoxFit.fitHeight,
+      //     alignment: (getWidth(context) > 700)
+      //         ? Alignment.centerRight
+      //         : Alignment.center,
+      //   ),
+      // ),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            "assets/flutter_me.png",
-          ),
-          fit: BoxFit.fitHeight,
-          alignment: (getWidth(context) > 700)
-              ? Alignment.centerRight
-              : Alignment.center,
+          image: AssetImage("assets/services.png"),
+          repeat: ImageRepeat.repeat,
         ),
       ),
       child: Center(
