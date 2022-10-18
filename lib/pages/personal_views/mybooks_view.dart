@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
 import 'package:ricarth_flutter/values/list_books.dart';
@@ -10,15 +12,44 @@ class MyBooksPage extends StatefulWidget {
 }
 
 class _MyBooksPageState extends State<MyBooksPage> {
-  List<Book> listBook = getListBooks();
+  List<Book> listBook = [];
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    firestore.collection("books").snapshots().listen((snapshot) {
+      List<Book> temp = [];
+
+      snapshot.docs.forEach((doc) {
+        Book book = Book.fromMap(doc.data());
+        temp.add(book);
+      });
+
+      temp = orderListBooks(temp);
+
+      setState(() {
+        listBook = temp;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       appBar: AppBar(
         title: Text(
-          "Personal Books",
+          "Leituras",
         ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(24),
+          ),
+        ),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.purple[800],
       ),
       body: Container(
         padding: (getWidth(context) < 700)
@@ -31,7 +62,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              SelectableText(
                 "Entendo a importância do hábito de ler, tanto para construção de um cidadão " +
                     "contextualizado, quanto para o seu [do cidadão] impacto na melhoria da socie" +
                     "dade. Venho ano após ano construindo e firmando esse hábito na minha vida. \n" +
@@ -39,8 +70,11 @@ class _MyBooksPageState extends State<MyBooksPage> {
                     "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro " +
                     "professor meu, Fernando Castor) deixo aqui registrado minhas leituras.\n",
                 textAlign: TextAlign.justify,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-              Divider(),
+              //Divider(),
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
               ),
@@ -59,9 +93,10 @@ class _MyBooksPageState extends State<MyBooksPage> {
 
   List<Widget> _generateWidgets() {
     List<Widget> listWidget = [];
-    int actualYear = 2022;
+    int actualYear = DateTime.now().year;
 
     int i = 0;
+    int count = 0;
     while (i < listBook.length) {
       if (listBook[i].startedLecture.year < actualYear) {
         actualYear = listBook[i].startedLecture.year;
@@ -71,19 +106,42 @@ class _MyBooksPageState extends State<MyBooksPage> {
             height: 250,
             margin: EdgeInsets.symmetric(horizontal: 50),
             alignment: Alignment.center,
-            color: MyColors.carolinaBlue,
-            child: Text(
-              actualYear.toString(),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.purple[700],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  (actualYear + 1).toString(),
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Text(
+                  "(" + count.toString() + ")",
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
+
+        listWidget.insert(listWidget.length - (count + 1), listWidget.last);
+        count = 0;
+        listWidget.removeLast();
       }
       listWidget.add(BookItem(book: listBook[i]));
+      count++;
       i++;
     }
     return listWidget;

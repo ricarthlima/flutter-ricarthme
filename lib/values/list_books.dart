@@ -3,6 +3,32 @@ import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
 List<Book> getListBooks() {
   List<Book> listBook = [
     Book(
+      title: "A Sereia da Floresta",
+      author: "Hiro Kawahara",
+      pages: 143,
+      startedLecture: DateTime.parse("2022-01-17"),
+      daysToFinish: 2,
+      urlImage:
+          "https://cdn-sites-images.46graus.com/files/photos/9c6b2587/2f68974d-a3f7-4b64-8a6a-7b2fd27435f5/coversereia-992x1440.png",
+    ),
+    Book(
+      title: "A Lenda de Ruff Ghanor - Vol.1: O garoto cabra",
+      author: "Leonel Caldela",
+      pages: 320,
+      startedLecture: DateTime.parse("2022-01-30"),
+      daysToFinish: 32,
+      urlImage: "https://m.media-amazon.com/images/I/510HhUtzd2L.jpg",
+    ),
+    Book(
+      title: "Revolução dos Bichos",
+      author: "George Orwell",
+      pages: 96,
+      startedLecture: DateTime.parse("2022-01-12"),
+      daysToFinish: 8,
+      urlImage:
+          "https://m.media-amazon.com/images/P/B08SYHHZLK.01._SCLZZZZZZZ_SX500_.jpg",
+    ),
+    Book(
       title: "Harry Potter e a Pedra Filosofal",
       author: "J.K. Rowling",
       pages: 208,
@@ -217,6 +243,10 @@ List<Book> getListBooks() {
     ),
   ];
 
+  return listBook;
+}
+
+orderListBooks(List<Book> listBook) {
   listBook.sort((a, b) {
     if (a.startedLecture.year < b.startedLecture.year) {
       return 1;

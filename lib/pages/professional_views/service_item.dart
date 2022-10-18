@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
 class ServiceItem extends StatefulWidget {
-  final String image;
-  final String title;
-  final String text;
-  final int color;
+  final String? image;
+  final String? title;
+  final String? text;
+  final int? color;
   ServiceItem({this.image, this.title, this.text, this.color});
   @override
   _ServiceItemState createState() => _ServiceItemState();
@@ -36,12 +36,12 @@ class _ServiceItemState extends State<ServiceItem> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(widget.image),
+            Image.asset(widget.image!),
             Padding(
               padding: EdgeInsets.only(bottom: 18),
             ),
             TypewriterAnimatedTextKit(
-              text: [widget.title],
+              text: [widget.title!],
               textStyle: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class _ServiceItemState extends State<ServiceItem> {
               speed: Duration(milliseconds: 50 + Random().nextInt(50)),
             ),
             Text(
-              widget.text,
+              widget.text!,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 13,

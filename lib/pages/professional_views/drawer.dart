@@ -4,8 +4,8 @@ import 'package:ricarth_flutter/values/my_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Drawer getHomeDrawer({
-  @required BuildContext context,
-  @required CarouselController carouselController,
+  required BuildContext context,
+  required CarouselController carouselController,
 }) {
   return Drawer(
     child: Container(

@@ -29,7 +29,7 @@ Widget getNonAppBar(
         ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   carouselController.animateToPage(0);
                 },
@@ -38,7 +38,7 @@ Widget getNonAppBar(
                   style: MyTextStyles().appBarButton,
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   carouselController.animateToPage(1);
                 },
@@ -47,16 +47,16 @@ Widget getNonAppBar(
                   style: MyTextStyles().appBarButton,
                 ),
               ),
-              FlatButton(
-                onPressed: () {
-                  carouselController.animateToPage(2);
-                },
-                child: Text(
-                  "Serviços",
-                  style: MyTextStyles().appBarButton,
-                ),
-              ),
-              FlatButton(
+              // FlatButton(
+              //   onPressed: () {
+              //     carouselController.animateToPage(2);
+              //   },
+              //   child: Text(
+              //     "Serviços",
+              //     style: MyTextStyles().appBarButton,
+              //   ),
+              // ),
+              TextButton(
                 onPressed: () {
                   carouselController.animateToPage(3);
                 },
@@ -65,7 +65,7 @@ Widget getNonAppBar(
                   style: MyTextStyles().appBarButton,
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   launch("http://github.com/ricarthlima");
                 },
@@ -88,7 +88,7 @@ Widget getNonAppBar(
                   ],
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, "/books");
                 },
@@ -115,7 +115,7 @@ Widget getNonAppBar(
           )
         : GestureDetector(
             onTap: () {
-              scaffoldKey.currentState.openDrawer();
+              scaffoldKey.currentState!.openDrawer();
             },
             child: Icon(
               Icons.menu,

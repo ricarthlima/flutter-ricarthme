@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "87849177170",
+    "project_id": "flutter-ricarthme",
+    "storage_bucket": "flutter-ricarthme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87849177170:android:a0cb4288221ebf9caa8f8b",
+        "android_client_info": {
+          "package_name": "com.example.ricarth_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87849177170-1kcvp3gqqekbaba86orb0tqcqf1e8bt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQsvLCzO_C_CZwMTjcrBbx10_V0ep-g70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87849177170-1kcvp3gqqekbaba86orb0tqcqf1e8bt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

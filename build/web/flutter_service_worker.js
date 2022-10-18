@@ -39,27 +39,31 @@ const RESOURCES = {
 "assets/assets/ricarth.png": "dd6966b19df25364cb94721673fd523a",
 "assets/assets/services.png": "0bceb42a2f397a853c4f193750f4aab4",
 "assets/FontManifest.json": "7e9433d5386f1e47ab22f0afd8e7a4f9",
-"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
+"assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
 "assets/fonts/NotoSans-Regular.ttf": "5a87cce84010f7cea085ae218d44a64b",
-"assets/NOTICES": "ef64a366594b23d803c45240153f2656",
+"assets/NOTICES": "d2164783292be2e9e032afc59fe58662",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
+"assets/shaders/ink_sparkle.frag": "6333b551ea27fd9d8e1271e92def26a9",
+"canvaskit/canvaskit.js": "2bc454a691c631b07a9307ac4ca47797",
+"canvaskit/canvaskit.wasm": "bf50631470eb967688cca13ee181af62",
+"canvaskit/profiling/canvaskit.js": "38164e5a72bdad0faa4ce740c9b8e564",
+"canvaskit/profiling/canvaskit.wasm": "95a45378b69e77af5ed2bc72b2209b94",
 "favicon.png": "c8b633e1e02043f81b37dccb28837456",
+"flutter.js": "f85e6fb278b0fd20c349186fb46ae36d",
 "icons/Icon-192.png": "0795fcfbce815666217cec0cbc20feab",
 "icons/Icon-512.png": "870114fb9818457fda34adac24a40cfb",
-"index.html": "89587f3d9a379a996e6f2c8174991a99",
-"/": "89587f3d9a379a996e6f2c8174991a99",
-"main.dart.js": "3479fc6090b3328afed9def879cea9a4",
+"index.html": "223cbd7bc02c964fc3a3e2a4392ea112",
+"/": "223cbd7bc02c964fc3a3e2a4392ea112",
+"main.dart.js": "73e3fa27b1385baa507e0b0b56915e55",
 "manifest.json": "370847913173b5d2e414f47088740b02",
-"version.json": "86de147ee5343277ac37765a035c711d"
+"version.json": "eb120dac552d473b68606cb3f4bb38e7"
 };
 
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = [
-  "/",
-"main.dart.js",
+  "main.dart.js",
 "index.html",
-"assets/NOTICES",
 "assets/AssetManifest.json",
 "assets/FontManifest.json"];
 // During install, the TEMP cache is populated with the application shell files.
@@ -158,9 +162,11 @@ self.addEventListener("fetch", (event) => {
     .then((cache) =>  {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
-        // lazily populate the cache.
+        // lazily populate the cache only if the resource was successfully fetched.
         return response || fetch(event.request).then((response) => {
-          cache.put(event.request, response.clone());
+          if (response && Boolean(response.ok)) {
+            cache.put(event.request, response.clone());
+          }
           return response;
         });
       })
