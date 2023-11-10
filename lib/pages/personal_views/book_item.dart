@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ricarth_flutter/services/auth_service.dart';
+import 'package:ricarth_flutter/services/book_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Book {
+  String? id;
   String urlImage;
   String title;
   String author;
@@ -12,16 +15,19 @@ class Book {
   bool? isHQ;
 
   Book({
+    this.id,
     required this.urlImage,
     required this.title,
     required this.author,
     required this.pages,
     required this.startedLecture,
     required this.daysToFinish,
+    this.isHQ,
   });
 
   Book.fromMap(Map<String, dynamic> map)
-      : urlImage = map["urlImage"],
+      : id = map["id"],
+        urlImage = map["urlImage"],
         title = map["title"],
         author = map["author"],
         pages = map["pages"],
@@ -31,6 +37,7 @@ class Book {
 
   Map<String, dynamic> toMap() {
     return {
+      "id": id,
       "urlImage": urlImage,
       "title": title,
       "author": author,
@@ -59,7 +66,9 @@ class BookItem extends StatelessWidget {
         }
       },
       onLongPress: () {
-        onLongPress(book: book!);
+        if (AuthService().isAuthenticated()) {
+          onLongPress(book: book!);
+        }
       },
       child: Container(
         width: 200,
@@ -67,11 +76,28 @@ class BookItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              book!.urlImage,
-              height: 200,
-
-              //cacheHeight: 200,
+            Stack(
+              children: [
+                Image.network(
+                  book!.urlImage,
+                  height: 200,
+                  //cacheHeight: 200,
+                ),
+                (AuthService().isAuthenticated())
+                    ? Positioned(
+                        bottom: 0,
+                        child: InkWell(
+                          onLongPress: () {
+                            BookService().deleteBook(book!);
+                          },
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ],
             ),
             Text(
               book!.title,

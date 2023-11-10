@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
 import 'package:ricarth_flutter/services/auth_service.dart';
+import 'package:ricarth_flutter/services/book_service.dart';
 import 'package:ricarth_flutter/values/list_books.dart';
 import 'package:flutter/services.dart';
 
@@ -24,6 +25,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
 
       snapshot.docs.forEach((doc) {
         Book book = Book.fromMap(doc.data());
+        book.id = doc.id;
         temp.add(book);
       });
 
@@ -135,6 +137,8 @@ class _MyBooksPageState extends State<MyBooksPage> {
     } else {
       _startedLectureController.text = DateTime.now().toString();
     }
+
+    bool isLoading = false;
 
     showDialog(
       context: context,
@@ -271,8 +275,52 @@ class _MyBooksPageState extends State<MyBooksPage> {
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.purple),
                           ),
-                          onPressed: () {},
-                          child: Text("Enviar"),
+                          onPressed: () {
+                            if (!isLoading) {
+                              setState(() {
+                                isLoading = true;
+                              });
+
+                              String id = _titleController.text;
+                              if (book != null && book.id != null) {
+                                id = book.id!;
+                              }
+
+                              BookService()
+                                  .addOrEditBook(
+                                Book(
+                                  id: id,
+                                  isHQ: isHQ,
+                                  urlImage: _urlImageController.text,
+                                  title: _titleController.text,
+                                  author: _authorController.text,
+                                  pages: int.parse(_pagesController.text),
+                                  startedLecture: DateTime.parse(
+                                      _startedLectureController.text),
+                                  daysToFinish: int.parse(
+                                    _daysToFinishController.text,
+                                  ),
+                                ),
+                              )
+                                  .then(
+                                (value) {
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              );
+                            }
+                          },
+                          child: (isLoading)
+                              ? SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Text("Enviar"),
                         ),
                       ],
                     ),
