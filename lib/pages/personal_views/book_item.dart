@@ -9,6 +9,7 @@ class Book {
   DateTime startedLecture;
   int daysToFinish;
   Function? onClick;
+  bool? isHQ;
 
   Book({
     required this.urlImage,
@@ -25,7 +26,8 @@ class Book {
         author = map["author"],
         pages = map["pages"],
         startedLecture = DateTime.parse(map["startedLecture"]),
-        daysToFinish = map["daysToFinish"];
+        daysToFinish = map["daysToFinish"],
+        isHQ = map["isHQ"];
 
   Map<String, dynamic> toMap() {
     return {
@@ -35,6 +37,7 @@ class Book {
       "pages": pages,
       "startedLecture": startedLecture.toString(),
       "daysToFinish": daysToFinish,
+      "isHQ": isHQ,
     };
   }
 }
@@ -71,7 +74,9 @@ class BookItem extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
-                color: Colors.purple[200],
+                color: (book!.isHQ != null && book!.isHQ!)
+                    ? Colors.red[200]
+                    : Colors.purple[300],
               ),
               textAlign: TextAlign.center,
             ),

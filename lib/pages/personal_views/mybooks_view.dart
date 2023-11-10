@@ -71,12 +71,14 @@ class _MyBooksPageState extends State<MyBooksPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SelectableText(
-                "Entendo a importância do hábito de ler, tanto para construção de um cidadão " +
-                    "contextualizado, quanto para o seu [do cidadão] impacto na melhoria da socie" +
-                    "dade. Venho ano após ano construindo e firmando esse hábito na minha vida. \n" +
-                    "\n" +
-                    "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro " +
-                    "professor meu, Fernando Castor) deixo aqui registrado minhas leituras.\n",
+                "Entendo a importância do hábito de ler, tanto para construção de um cidadão "
+                "contextualizado, quanto para o seu [do cidadão] impacto na melhoria da socie"
+                "dade. Venho ano após ano construindo e firmando esse hábito na minha vida. \n"
+                "\n"
+                "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro "
+                "professor meu, Fernando Castor) deixo aqui registrado minhas leituras.\n"
+                "\n"
+                "Ah! Gosto de registrar minhas HQs, mas elas não contam para os totais de livros.",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   color: Colors.white,
@@ -84,7 +86,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
               ),
               //Divider(),
               Padding(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 32),
               ),
               Center(
                 child: Wrap(
@@ -123,6 +125,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
 
     int i = 0;
     int count = 0;
+    int countHQ = 0;
     while (i < listBook.length) {
       if (listBook[i].startedLecture.year < actualYear) {
         actualYear = listBook[i].startedLecture.year;
@@ -148,7 +151,9 @@ class _MyBooksPageState extends State<MyBooksPage> {
                   ),
                 ),
                 Text(
-                  "(" + count.toString() + ")",
+                  (countHQ > 0)
+                      ? "(" + (count - countHQ).toString() + " + $countHQ)"
+                      : "($count)",
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                       color: Colors.white,
@@ -164,9 +169,13 @@ class _MyBooksPageState extends State<MyBooksPage> {
 
         listWidget.insert(listWidget.length - (count + 1), listWidget.last);
         count = 0;
+        countHQ = 0;
         listWidget.removeLast();
       }
       listWidget.add(BookItem(book: listBook[i]));
+      if (listBook[i].isHQ != null && listBook[i].isHQ!) {
+        countHQ++;
+      }
       count++;
       i++;
     }
