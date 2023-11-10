@@ -44,7 +44,8 @@ class Book {
 
 class BookItem extends StatelessWidget {
   final Book? book;
-  BookItem({this.book});
+  final Function onLongPress;
+  BookItem({this.book, required this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,9 @@ class BookItem extends StatelessWidget {
           String text = book!.title.toLowerCase().replaceAll(" ", "+");
           launchUrl(Uri.parse("https://www.amazon.com.br/s?k=$text"));
         }
+      },
+      onLongPress: () {
+        onLongPress(book: book!);
       },
       child: Container(
         width: 200,

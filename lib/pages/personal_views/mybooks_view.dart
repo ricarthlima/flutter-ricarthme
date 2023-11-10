@@ -5,6 +5,7 @@ import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
 import 'package:ricarth_flutter/services/auth_service.dart';
 import 'package:ricarth_flutter/values/list_books.dart';
+import 'package:flutter/services.dart';
 
 class MyBooksPage extends StatefulWidget {
   @override
@@ -115,8 +116,174 @@ class _MyBooksPageState extends State<MyBooksPage> {
     }
   }
 
-  showAddDialog() {
-    print("ADD");
+  showAddDialog({Book? book}) {
+    TextEditingController _titleController = TextEditingController();
+    TextEditingController _authorController = TextEditingController();
+    TextEditingController _pagesController = TextEditingController();
+    TextEditingController _startedLectureController = TextEditingController();
+    TextEditingController _daysToFinishController = TextEditingController();
+    TextEditingController _urlImageController = TextEditingController();
+    bool isHQ = (book != null && book.isHQ != null) ? book.isHQ! : false;
+
+    if (book != null) {
+      _titleController.text = book.title;
+      _authorController.text = book.author;
+      _pagesController.text = book.pages.toString();
+      _startedLectureController.text = book.startedLecture.toString();
+      _daysToFinishController.text = book.daysToFinish.toString();
+      _urlImageController.text = book.urlImage;
+    } else {
+      _startedLectureController.text = DateTime.now().toString();
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              child: Container(
+                width: 300,
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: Form(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.book,
+                              color: Colors.purple,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              (book != null)
+                                  ? "Editar Livro"
+                                  : "Adicionar Livro",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.purple),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        TextFormField(
+                          controller: _titleController,
+                          maxLength: 50,
+                          decoration: InputDecoration(
+                            labelText: "Título",
+                          ),
+                        ),
+                        TextFormField(
+                          controller: _authorController,
+                          maxLength: 50,
+                          decoration: InputDecoration(labelText: "Autor"),
+                        ),
+                        TextFormField(
+                          controller: _pagesController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration:
+                              InputDecoration(labelText: "Contagem de páginas"),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              child: TextFormField(
+                                controller: _startedLectureController,
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  labelText: "Comecei em",
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              child: Icon(
+                                Icons.date_range,
+                                color: Colors.purple,
+                                size: 32,
+                              ),
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.parse(
+                                      _startedLectureController.text),
+                                  firstDate: DateTime.now().subtract(
+                                    Duration(days: 3650),
+                                  ),
+                                  lastDate: DateTime.now(),
+                                ).then((DateTime? date) {
+                                  if (date != null) {
+                                    _startedLectureController.text =
+                                        date.toString();
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: _daysToFinishController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration:
+                              InputDecoration(labelText: "Dias para leitura"),
+                        ),
+                        TextFormField(
+                          controller: _urlImageController,
+                          decoration:
+                              InputDecoration(labelText: "Url da Imagem"),
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Checkbox(
+                              visualDensity: VisualDensity.compact,
+                              activeColor: Colors.purple,
+                              value: isHQ,
+                              onChanged: (value) {
+                                setState(() {
+                                  isHQ = !isHQ;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 8),
+                            Text("É uma HQ?"),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Divider(),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.purple),
+                          ),
+                          onPressed: () {},
+                          child: Text("Enviar"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   List<Widget> _generateWidgets() {
@@ -172,7 +339,10 @@ class _MyBooksPageState extends State<MyBooksPage> {
         countHQ = 0;
         listWidget.removeLast();
       }
-      listWidget.add(BookItem(book: listBook[i]));
+      listWidget.add(BookItem(
+        book: listBook[i],
+        onLongPress: showAddDialog,
+      ));
       if (listBook[i].isHQ != null && listBook[i].isHQ!) {
         countHQ++;
       }
