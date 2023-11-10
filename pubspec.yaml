@@ -31,9 +31,10 @@ dependencies:
   animated_text_kit: ^4.2.2
   carousel_slider: ^4.1.1
   url_launcher: ^6.1.6
-  firebase_core: ^2.0.0
-  cloud_firestore: ^4.0.1
-  google_fonts: ^3.0.1
+  firebase_core: ^2.22.0
+  cloud_firestore: ^4.13.0
+  google_fonts: ^6.1.0
+  firebase_auth: ^4.13.0
 
 dev_dependencies:
   flutter_test:

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
 import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
+import 'package:ricarth_flutter/services/auth_service.dart';
 import 'package:ricarth_flutter/values/list_books.dart';
-import 'package:ricarth_flutter/values/my_colors.dart';
 
 class MyBooksPage extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class MyBooksPage extends StatefulWidget {
 class _MyBooksPageState extends State<MyBooksPage> {
   List<Book> listBook = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  AuthService authService = AuthService();
 
   @override
   void initState() {
@@ -50,6 +51,13 @@ class _MyBooksPageState extends State<MyBooksPage> {
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.purple[800],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          fabClicked();
+        },
+        backgroundColor: Colors.purple,
+        child: Icon(Icons.add),
       ),
       body: Container(
         padding: (getWidth(context) < 700)
@@ -89,6 +97,24 @@ class _MyBooksPageState extends State<MyBooksPage> {
         ),
       ),
     );
+  }
+
+  fabClicked() {
+    if (!authService.isAuthenticated()) {
+      authService.showAuthDialog(context).then((value) {
+        if (value != null) {
+          if ((value as bool) == true) {
+            showAddDialog();
+          }
+        }
+      });
+    } else {
+      showAddDialog();
+    }
+  }
+
+  showAddDialog() {
+    print("ADD");
   }
 
   List<Widget> _generateWidgets() {
