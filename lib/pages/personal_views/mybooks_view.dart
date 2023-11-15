@@ -18,6 +18,8 @@ class _MyBooksPageState extends State<MyBooksPage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   AuthService authService = AuthService();
 
+  bool isShowingHQs = false;
+
   @override
   void initState() {
     firestore.collection("books").snapshots().listen((snapshot) {
@@ -99,10 +101,26 @@ class _MyBooksPageState extends State<MyBooksPage> {
                   color: Colors.white,
                 ),
               ),
-              //Divider(),
-              Padding(
-                padding: EdgeInsets.only(bottom: 32),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Checkbox(
+                    value: isShowingHQs,
+                    activeColor: Colors.purple,
+                    onChanged: (value) {
+                      setState(() {
+                        isShowingHQs = !isShowingHQs;
+                      });
+                    },
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    "Mostrar HQs",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
+              SizedBox(height: 16),
               Center(
                 child: Wrap(
                   runSpacing: 50,
@@ -399,14 +417,25 @@ class _MyBooksPageState extends State<MyBooksPage> {
         countHQ = 0;
         listWidget.removeLast();
       }
-      listWidget.add(BookItem(
-        book: listBook[i],
-        onLongPress: showAddDialog,
-      ));
+
+      bool addItem = false;
+
       if (listBook[i].isHQ != null && listBook[i].isHQ!) {
-        countHQ++;
+        if (isShowingHQs) {
+          addItem = true;
+          countHQ++;
+        }
+      } else {
+        addItem = true;
       }
-      count++;
+
+      if (addItem) {
+        listWidget.add(BookItem(
+          book: listBook[i],
+          onLongPress: showAddDialog,
+        ));
+        count++;
+      }
       i++;
     }
     return listWidget;
