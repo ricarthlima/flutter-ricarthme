@@ -8,7 +8,13 @@ class AuthService {
     return _firebaseAuth.currentUser != null;
   }
 
+  Future<void> logout() {
+    return _firebaseAuth.signOut();
+  }
+
   Future<dynamic> showAuthDialog(BuildContext context) async {
+    bool isLoading = false;
+
     return showDialog(
       context: context,
       builder: (context) {
@@ -17,8 +23,6 @@ class AuthService {
             TextEditingController _emailController = TextEditingController();
             TextEditingController _passwordController = TextEditingController();
             GlobalKey<FormState> _key = GlobalKey<FormState>();
-
-            bool isLoading = false;
 
             return Form(
               key: _key,

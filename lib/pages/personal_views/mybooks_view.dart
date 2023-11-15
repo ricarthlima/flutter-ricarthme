@@ -43,25 +43,37 @@ class _MyBooksPageState extends State<MyBooksPage> {
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
-        title: Text(
-          "Leituras",
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(24),
-          ),
-        ),
-        elevation: 0,
+        title: Text("Leituras"),
         centerTitle: true,
         backgroundColor: Colors.purple[800],
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (!authService.isAuthenticated()) {
+                authService.showAuthDialog(context).then((value) {
+                  setState(() {});
+                });
+              } else {
+                authService.logout().then((value) {
+                  setState(() {});
+                });
+              }
+            },
+            icon: (!authService.isAuthenticated())
+                ? Icon(Icons.person)
+                : Icon(Icons.logout),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          fabClicked();
-        },
-        backgroundColor: Colors.purple,
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: (authService.isAuthenticated())
+          ? FloatingActionButton(
+              onPressed: () {
+                fabClicked();
+              },
+              backgroundColor: Colors.purple,
+              child: Icon(Icons.add),
+            )
+          : null,
       body: Container(
         padding: (getWidth(context) < 700)
             ? EdgeInsets.all(15)
@@ -75,8 +87,8 @@ class _MyBooksPageState extends State<MyBooksPage> {
             children: [
               SelectableText(
                 "Entendo a importância do hábito de ler, tanto para construção de um cidadão "
-                "contextualizado, quanto para o seu [do cidadão] impacto na melhoria da socie"
-                "dade. Venho ano após ano construindo e firmando esse hábito na minha vida. \n"
+                "contextualizado, quanto para o seu impacto na melhoria da sociedade. "
+                "Venho ano após ano construindo e firmando esse hábito na minha vida. \n"
                 "\n"
                 "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro "
                 "professor meu, Fernando Castor) deixo aqui registrado minhas leituras.\n"
@@ -93,7 +105,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
               ),
               Center(
                 child: Wrap(
-                  runSpacing: 20,
+                  runSpacing: 50,
                   children: _generateWidgets(),
                 ),
               ),
@@ -347,8 +359,8 @@ class _MyBooksPageState extends State<MyBooksPage> {
         listWidget.add(
           Container(
             width: 100,
-            height: 250,
-            margin: EdgeInsets.symmetric(horizontal: 50),
+            height: 200,
+            margin: EdgeInsets.symmetric(horizontal: 50), //(200 - width)/2
             alignment: Alignment.center,
             color: Colors.purple[700],
             child: Column(

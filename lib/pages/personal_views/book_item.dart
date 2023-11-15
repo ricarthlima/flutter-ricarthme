@@ -77,6 +77,7 @@ class BookItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
                 Image.network(
                   book!.urlImage,
@@ -85,27 +86,79 @@ class BookItem extends StatelessWidget {
                 ),
                 (AuthService().isAuthenticated())
                     ? Positioned(
-                        bottom: 0,
+                        top: 24,
+                        right: 0,
                         child: InkWell(
                           onLongPress: () {
                             BookService().deleteBook(book!);
                           },
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
+                          child: Container(
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withAlpha(150),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Icon(
+                              Icons.delete,
+                              size: 14,
+                              color: Colors.red,
+                            ),
                           ),
                         ),
                       )
                     : Container(),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withAlpha(150),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                          barrierColor: Colors.black.withAlpha(200),
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              elevation: 0,
+                              backgroundColor: Colors.transparent,
+                              child: TweenAnimationBuilder<double>(
+                                tween: Tween(begin: 0.3, end: 1),
+                                duration: Duration(milliseconds: 300),
+                                builder: (context, value, child) {
+                                  return Image.network(
+                                    book!.urlImage,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.75 *
+                                        value,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Icon(
+                        Icons.remove_red_eye,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
+            SizedBox(height: 8),
             Text(
               book!.title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
                 color: (book!.isHQ != null && book!.isHQ!)
-                    ? Colors.red[200]
+                    ? Colors.yellow[300]
                     : Colors.purple[300],
               ),
               textAlign: TextAlign.center,
