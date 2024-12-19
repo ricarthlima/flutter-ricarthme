@@ -3,13 +3,11 @@ import 'package:ricarth_flutter/values/my_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Widget getSocialMedia(BuildContext context) {
-  return Container(
+  return Align(
     alignment: Alignment.bottomLeft,
-    margin: EdgeInsets.fromLTRB(15, 0, 0, 15),
     child: Container(
-      alignment: Alignment.center,
-      height: 36,
-      width: 200,
+      margin: EdgeInsets.fromLTRB(15, 0, 0, 15),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: MyColors.white10,
         borderRadius: BorderRadius.circular(25),
@@ -17,8 +15,10 @@ Widget getSocialMedia(BuildContext context) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        spacing: 16,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: () {
               _launchURL("https://github.com/ricarthlima");
             },
@@ -27,7 +27,7 @@ Widget getSocialMedia(BuildContext context) {
               width: 24,
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               _launchURL("https://twitter.com/ricarthlima");
             },
@@ -36,7 +36,7 @@ Widget getSocialMedia(BuildContext context) {
               width: 24,
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               _launchURL("https://www.instagram.com/ricarthlima/");
             },
@@ -45,7 +45,7 @@ Widget getSocialMedia(BuildContext context) {
               width: 24,
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               _launchURL(
                   "https://www.youtube.com/channel/UCzQIC5Emb1scaYgpJKjktaQ");
@@ -55,7 +55,7 @@ Widget getSocialMedia(BuildContext context) {
               width: 24,
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               _launchURL("mailto:ricarth.lima@gmail.com");
             },
@@ -71,8 +71,8 @@ Widget getSocialMedia(BuildContext context) {
 }
 
 _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url));
   } else {
     throw 'Could not launch $url';
   }

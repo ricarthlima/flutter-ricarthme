@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,20 +87,24 @@ class _MyBooksPageState extends State<MyBooksPage> {
               ),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SelectableText(
-                "Entendo a importância do hábito de ler, tanto para construção de um cidadão "
-                "contextualizado, quanto para o seu impacto na melhoria da sociedade. "
-                "Venho ano após ano construindo e firmando esse hábito na minha vida. \n"
-                "\n"
-                "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro "
-                "professor meu, Fernando Castor) deixo aqui registrado minhas leituras.\n"
-                "\n"
-                "Ah! Gosto de registrar minhas HQs, mas elas não contam para os totais de livros.",
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  color: Colors.white,
+              SizedBox(
+                width: min(700, MediaQuery.of(context).size.width),
+                child: SelectableText(
+                  "Entendo a importância do hábito da leitura, tanto pela busca "
+                  "de um autoconhecimento,  quanto para construção de um cidadão "
+                  "crítico e contextualizado. "
+                  "Venho ano após ano, admito que, com dificuldades, construindo e firmando esse hábito na minha vida. "
+                  "Assim, inspirado no meu professor Vinicius Garcia (que se inspirou em outro "
+                  "professor meu, Fernando Castor) deixo aqui registrado minhas leituras. "
+                  "Ah! Gosto de registrar minhas HQs, mas elas contam separadamente para o total.\n"
+                  "Minha meta sempre será, pelo menos, 12 livros em um ano.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
               SizedBox(height: 16),
@@ -139,16 +145,16 @@ class _MyBooksPageState extends State<MyBooksPage> {
       authService.showAuthDialog(context).then((value) {
         if (value != null) {
           if ((value as bool) == true) {
-            showAddDialog();
+            showUpinsertDialog();
           }
         }
       });
     } else {
-      showAddDialog();
+      showUpinsertDialog();
     }
   }
 
-  showAddDialog({Book? book}) {
+  showUpinsertDialog({Book? book}) {
     TextEditingController _titleController = TextEditingController();
     TextEditingController _authorController = TextEditingController();
     TextEditingController _pagesController = TextEditingController();
@@ -303,7 +309,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.purple),
+                                WidgetStateProperty.all(Colors.purple),
                           ),
                           onPressed: () {
                             if (!isLoading) {
@@ -371,6 +377,22 @@ class _MyBooksPageState extends State<MyBooksPage> {
     int i = 0;
     int count = 0;
     int countHQ = 0;
+
+    listBook.add(
+      Book(
+        urlImage: "",
+        title: "title",
+        author: "author",
+        pages: 0,
+        startedLecture: DateTime.parse("2016-03-03"),
+        daysToFinish: 2,
+      ),
+    );
+
+    listBook.sort(
+      (a, b) => b.startedLecture.year.compareTo(a.startedLecture.year),
+    );
+
     while (i < listBook.length) {
       if (listBook[i].startedLecture.year < actualYear) {
         actualYear = listBook[i].startedLecture.year;
@@ -430,14 +452,31 @@ class _MyBooksPageState extends State<MyBooksPage> {
       }
 
       if (addItem) {
-        listWidget.add(BookItem(
+        listWidget.add(BookItemWidget(
           book: listBook[i],
-          onLongPress: showAddDialog,
+          onLongPress: showUpinsertDialog,
         ));
         count++;
       }
       i++;
     }
+
+    listWidget.removeLast();
+    listWidget.add(
+      Container(
+        width: 150,
+        height: 200,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(color: Colors.purple.withAlpha(50)),
+        child: Center(
+          child: Text(
+            "E aqui terminam o registros, pois a ideia só me veio em 2017. Obrigado por acompanhar!",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+
     return listWidget;
   }
 }

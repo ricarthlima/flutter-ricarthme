@@ -17,7 +17,8 @@ class ProfessionalPage extends StatefulWidget {
 
 class _ProfessionalPageState extends State<ProfessionalPage> {
   int controller = 0;
-  CarouselController buttonCarouselController = CarouselController();
+  CarouselSliderController buttonCarouselController =
+      CarouselSliderController();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override

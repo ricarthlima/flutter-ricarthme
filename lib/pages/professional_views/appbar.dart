@@ -16,7 +16,7 @@ Widget getDefaultAppBar(BuildContext context) {
 
 Widget getNonAppBar(
   BuildContext context,
-  CarouselController carouselController,
+  CarouselSliderController carouselController,
   GlobalKey<ScaffoldState> scaffoldKey,
 ) {
   return Container(
@@ -58,7 +58,7 @@ Widget getNonAppBar(
               // ),
               TextButton(
                 onPressed: () {
-                  carouselController.animateToPage(3);
+                  carouselController.animateToPage(2);
                 },
                 child: Text(
                   "Contato",
@@ -67,7 +67,7 @@ Widget getNonAppBar(
               ),
               TextButton(
                 onPressed: () {
-                  launch("http://github.com/ricarthlima");
+                  launchUrl(Uri.parse("http://github.com/ricarthlima"));
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

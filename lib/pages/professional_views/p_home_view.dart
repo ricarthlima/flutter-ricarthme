@@ -27,28 +27,36 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 8,
           children: [
             Text(
               "RICARTH LIMA",
               style: MyTextStyles().heading1,
             ),
             Text(
-              "Desenvolvedor de Aplicativos",
+              "Instrutor de software,",
               style: MyTextStyles().subHeadingPink,
             ),
             Text(
-              "Programador Flutter",
+              "criador de conteúdo,",
               style: MyTextStyles().subHeadingPink,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  "e ",
+                  "e programador em ",
                   style: MyTextStyles().subHeadingPink,
                 ),
                 TypewriterAnimatedTextKit(
-                  text: ["Unity.", "Python.", "Rails.", "Java.", "Full-Stack."],
+                  text: [
+                    "Flutter.",
+                    "Unity.",
+                    "Python.",
+                    "Rails.",
+                    "Java.",
+                    "Full-Stack.",
+                  ],
                   textStyle: MyTextStyles().subHeadingPink,
                   textAlign: TextAlign.start,
                   speed: const Duration(milliseconds: 75),

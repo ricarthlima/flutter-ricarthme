@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 Drawer getHomeDrawer({
   required BuildContext context,
-  required CarouselController carouselController,
+  required CarouselSliderController carouselController,
 }) {
   return Drawer(
     child: Container(
@@ -54,7 +54,7 @@ Drawer getHomeDrawer({
             title: Text("Portfólio",
                 style: TextStyle(fontSize: 17, color: Colors.white)),
             onTap: () {
-              launch("http://github.com/ricarthlima");
+              launchUrl(Uri.parse("http://github.com/ricarthlima"));
               Navigator.pop(context);
             },
           ),

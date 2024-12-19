@@ -49,10 +49,10 @@ class Book {
   }
 }
 
-class BookItem extends StatelessWidget {
+class BookItemWidget extends StatelessWidget {
   final Book? book;
   final Function onLongPress;
-  BookItem({this.book, required this.onLongPress});
+  BookItemWidget({this.book, required this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -86,30 +86,65 @@ class BookItem extends StatelessWidget {
                 ),
                 (AuthService().isAuthenticated())
                     ? Positioned(
-                        top: 24,
-                        right: 0,
-                        child: InkWell(
-                          onLongPress: () {
-                            BookService().deleteBook(book!);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withAlpha(150),
-                              borderRadius: BorderRadius.circular(24),
+                        bottom: 4,
+                        right: 4,
+                        child: Column(
+                          spacing: 2,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                onLongPress(book: book!);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withAlpha(150),
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Icon(
+                                  Icons.edit,
+                                  size: 14,
+                                  color: Colors.orange,
+                                ),
+                              ),
                             ),
-                            child: Icon(
-                              Icons.delete,
-                              size: 14,
-                              color: Colors.red,
+                            InkWell(
+                              onTap: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      "Deseja remover ${book!.title}?",
+                                    ),
+                                    action: SnackBarAction(
+                                      label: "Remover",
+                                      onPressed: () {
+                                        BookService().deleteBook(book!);
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withAlpha(150),
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Icon(
+                                  Icons.delete,
+                                  size: 14,
+                                  color: Colors.red,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       )
                     : Container(),
                 Positioned(
-                  top: 0,
-                  right: 0,
+                  top: 4,
+                  right: 4,
                   child: Container(
                     padding: EdgeInsets.all(4),
                     decoration: BoxDecoration(
@@ -154,6 +189,7 @@ class BookItem extends StatelessWidget {
             SizedBox(height: 8),
             Text(
               book!.title,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -173,18 +209,16 @@ class BookItem extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Divider(),
+            ),
             //Other Information
             Text(
               book!.pages.toString() +
-                  " pages in (" +
-                  book!.startedLecture.day.toString() +
-                  "/" +
-                  book!.startedLecture.month.toString() +
-                  "/" +
-                  book!.startedLecture.year.toString() +
-                  ") + " +
+                  " páginas em\n(${convertDate(book!.startedLecture)}) + " +
                   book!.daysToFinish.toString() +
-                  " days",
+                  " dias",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
@@ -196,4 +230,14 @@ class BookItem extends StatelessWidget {
       ),
     );
   }
+}
+
+String convertDate(DateTime date) {
+  String dia = date.day.toString();
+  String mes = date.month.toString();
+
+  if (dia.length == 1) dia = "0$dia";
+  if (mes.length == 1) mes = "0$mes";
+
+  return dia + "/" + mes + "/" + date.year.toString();
 }

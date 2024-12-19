@@ -60,8 +60,7 @@ class AuthService {
                   SizedBox(width: 8),
                   ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.purple),
-                    ),
+                        backgroundColor: WidgetStatePropertyAll(Colors.purple)),
                     onPressed: () {
                       setState(() {
                         isLoading = true;
