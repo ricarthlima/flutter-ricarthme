@@ -1,4 +1,4 @@
-import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
+import 'package:ricarth_flutter/models/book_item.dart';
 
 List<Book> getListBooks() {
   List<Book> listBook = [

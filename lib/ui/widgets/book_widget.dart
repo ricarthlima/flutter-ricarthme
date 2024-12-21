@@ -1,58 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ricarth_flutter/helpers/convert_date.dart';
+import 'package:ricarth_flutter/models/book_item.dart';
 import 'package:ricarth_flutter/services/auth_service.dart';
 import 'package:ricarth_flutter/services/book_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Book {
-  String? id;
-  String urlImage;
-  String title;
-  String author;
-  int pages;
-  DateTime startedLecture;
-  int daysToFinish;
-  Function? onClick;
-  bool? isHQ;
-
-  Book({
-    this.id,
-    required this.urlImage,
-    required this.title,
-    required this.author,
-    required this.pages,
-    required this.startedLecture,
-    required this.daysToFinish,
-    this.isHQ,
-  });
-
-  Book.fromMap(Map<String, dynamic> map)
-      : id = map["id"],
-        urlImage = map["urlImage"],
-        title = map["title"],
-        author = map["author"],
-        pages = map["pages"],
-        startedLecture = DateTime.parse(map["startedLecture"]),
-        daysToFinish = map["daysToFinish"],
-        isHQ = map["isHQ"];
-
-  Map<String, dynamic> toMap() {
-    return {
-      "id": id,
-      "urlImage": urlImage,
-      "title": title,
-      "author": author,
-      "pages": pages,
-      "startedLecture": startedLecture.toString(),
-      "daysToFinish": daysToFinish,
-      "isHQ": isHQ,
-    };
-  }
-}
-
 class BookItemWidget extends StatelessWidget {
   final Book? book;
   final Function onLongPress;
-  BookItemWidget({this.book, required this.onLongPress});
+  final bool isBacklog;
+  BookItemWidget({
+    this.book,
+    required this.onLongPress,
+    this.isBacklog = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +44,26 @@ class BookItemWidget extends StatelessWidget {
                   book!.urlImage,
                   height: 200,
                   //cacheHeight: 200,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Visibility(
+                    visible: isBacklog,
+                    child: Container(
+                      width: 92,
+                      height: 24,
+                      decoration: BoxDecoration(color: Colors.red[900]),
+                      child: Center(
+                        child: Text(
+                          "BACKLOG",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 (AuthService().isAuthenticated())
                     ? Positioned(
@@ -215,10 +196,12 @@ class BookItemWidget extends StatelessWidget {
             ),
             //Other Information
             Text(
-              book!.pages.toString() +
-                  " páginas em\n(${convertDate(book!.startedLecture)}) + " +
-                  book!.daysToFinish.toString() +
-                  " dias",
+              (book!.daysToFinish != 0)
+                  ? book!.pages.toString() +
+                      " páginas em\n(${convertDate(book!.startedLecture)})" +
+                      " + ${book!.daysToFinish.toString()} dias"
+                  : book!.pages.toString() +
+                      " páginas em\n(${convertDate(book!.startedLecture)})",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
@@ -230,14 +213,4 @@ class BookItemWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-String convertDate(DateTime date) {
-  String dia = date.day.toString();
-  String mes = date.month.toString();
-
-  if (dia.length == 1) dia = "0$dia";
-  if (mes.length == 1) mes = "0$mes";
-
-  return dia + "/" + mes + "/" + date.year.toString();
 }

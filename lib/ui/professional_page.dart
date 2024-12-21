@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:ricarth_flutter/pages/professional_views/appbar.dart';
-import 'package:ricarth_flutter/pages/professional_views/drawer.dart';
+import 'package:ricarth_flutter/ui/professional_views/appbar.dart';
+import 'package:ricarth_flutter/ui/professional_views/drawer.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
-import 'package:ricarth_flutter/pages/professional_views/p_contact_view.dart';
-import 'package:ricarth_flutter/pages/professional_views/social_medias.dart';
+import 'package:ricarth_flutter/ui/professional_views/p_contact_view.dart';
+import 'package:ricarth_flutter/ui/professional_views/social_medias.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
 import 'professional_views/p_home_view.dart';

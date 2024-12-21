@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
-import 'package:ricarth_flutter/pages/professional_views/service_item.dart';
+import 'package:ricarth_flutter/ui/professional_views/service_item.dart';
 import 'package:ricarth_flutter/values/text_styles.dart';
 
 class PServicesView extends StatefulWidget {

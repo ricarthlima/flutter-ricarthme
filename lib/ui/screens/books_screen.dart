@@ -1,21 +1,23 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
-import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
+import 'package:ricarth_flutter/models/book_item.dart';
 import 'package:ricarth_flutter/services/auth_service.dart';
 import 'package:ricarth_flutter/services/book_service.dart';
+import 'package:ricarth_flutter/ui/widgets/book_widget.dart';
 import 'package:ricarth_flutter/values/list_books.dart';
 import 'package:flutter/services.dart';
 
-class MyBooksPage extends StatefulWidget {
+class BooksScreen extends StatefulWidget {
   @override
-  _MyBooksPageState createState() => _MyBooksPageState();
+  _BooksScreenState createState() => _BooksScreenState();
 }
 
-class _MyBooksPageState extends State<MyBooksPage> {
+class _BooksScreenState extends State<BooksScreen> {
   List<Book> listBook = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   AuthService authService = AuthService();
@@ -333,9 +335,12 @@ class _MyBooksPageState extends State<MyBooksPage> {
                                   pages: int.parse(_pagesController.text),
                                   startedLecture: DateTime.parse(
                                       _startedLectureController.text),
-                                  daysToFinish: int.parse(
-                                    _daysToFinishController.text,
-                                  ),
+                                  daysToFinish:
+                                      _daysToFinishController.text != ""
+                                          ? int.parse(
+                                              _daysToFinishController.text,
+                                            )
+                                          : 0,
                                 ),
                               )
                                   .then(
@@ -441,6 +446,7 @@ class _MyBooksPageState extends State<MyBooksPage> {
       }
 
       bool addItem = false;
+      bool isBacklog = false;
 
       if (listBook[i].isHQ != null && listBook[i].isHQ!) {
         if (isShowingHQs) {
@@ -451,11 +457,21 @@ class _MyBooksPageState extends State<MyBooksPage> {
         addItem = true;
       }
 
+      if (listBook[i].daysToFinish == 0) {
+        isBacklog = true;
+        if (FirebaseAuth.instance.currentUser == null) {
+          addItem = false;
+        }
+      }
+
       if (addItem) {
-        listWidget.add(BookItemWidget(
-          book: listBook[i],
-          onLongPress: showUpinsertDialog,
-        ));
+        listWidget.add(
+          BookItemWidget(
+            book: listBook[i],
+            onLongPress: showUpinsertDialog,
+            isBacklog: isBacklog,
+          ),
+        );
         count++;
       }
       i++;

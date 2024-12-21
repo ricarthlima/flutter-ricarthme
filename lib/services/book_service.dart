@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ricarth_flutter/pages/personal_views/book_item.dart';
+import 'package:ricarth_flutter/models/book_item.dart';
 
 class BookService {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
