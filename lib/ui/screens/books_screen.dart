@@ -399,8 +399,13 @@ class _BooksScreenState extends State<BooksScreen> {
     );
 
     while (i < listBook.length) {
-      if (listBook[i].startedLecture.year < actualYear) {
-        actualYear = listBook[i].startedLecture.year;
+      if ((listBook[i].startedLecture)
+              .add(Duration(days: listBook[i].daysToFinish))
+              .year <
+          actualYear) {
+        actualYear = (listBook[i].startedLecture)
+            .add(Duration(days: listBook[i].daysToFinish))
+            .year;
         listWidget.add(
           Container(
             width: 100,
