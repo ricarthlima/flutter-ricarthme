@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ricarth_flutter/helpers/convert_date.dart';
-import 'package:ricarth_flutter/models/book_item.dart';
+import 'package:ricarth_flutter/books/models/book_item.dart';
 import 'package:ricarth_flutter/services/auth_service.dart';
-import 'package:ricarth_flutter/services/book_service.dart';
+import 'package:ricarth_flutter/books/services/book_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BookItemWidget extends StatelessWidget {
-  final Book? book;
-  final Function onLongPress;
+  final Book book;
+  final Function onShowUpdateModal;
   final bool isBacklog;
   BookItemWidget({
-    this.book,
-    required this.onLongPress,
+    required this.book,
+    required this.onShowUpdateModal,
     this.isBacklog = false,
   });
 
@@ -19,16 +19,16 @@ class BookItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (book!.onClick != null) {
-          book!.onClick!();
+        if (book.onClick != null) {
+          book.onClick!();
         } else {
-          String text = book!.title.toLowerCase().replaceAll(" ", "+");
+          String text = book.title.toLowerCase().replaceAll(" ", "+");
           launchUrl(Uri.parse("https://www.amazon.com.br/s?k=$text"));
         }
       },
       onLongPress: () {
         if (AuthService().isAuthenticated()) {
-          onLongPress(book: book!);
+          onShowUpdateModal(context: context, book: book);
         }
       },
       child: Container(
@@ -41,7 +41,7 @@ class BookItemWidget extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  book!.urlImage,
+                  book.urlImage,
                   height: 200,
                   //cacheHeight: 200,
                 ),
@@ -74,7 +74,7 @@ class BookItemWidget extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                onLongPress(book: book!);
+                                onShowUpdateModal(context: context, book: book);
                               },
                               child: Container(
                                 padding: EdgeInsets.all(4),
@@ -95,12 +95,12 @@ class BookItemWidget extends StatelessWidget {
                                   SnackBar(
                                     backgroundColor: Colors.red,
                                     content: Text(
-                                      "Deseja remover ${book!.title}?",
+                                      "Deseja remover ${book.title}?",
                                     ),
                                     action: SnackBarAction(
                                       label: "Remover",
                                       onPressed: () {
-                                        BookService().deleteBook(book!);
+                                        BookService().deleteBook(book);
                                       },
                                     ),
                                   ),
@@ -146,7 +146,7 @@ class BookItemWidget extends StatelessWidget {
                                 duration: Duration(milliseconds: 300),
                                 builder: (context, value, child) {
                                   return Image.network(
-                                    book!.urlImage,
+                                    book.urlImage,
                                     height: MediaQuery.of(context).size.height *
                                         0.75 *
                                         value,
@@ -169,12 +169,12 @@ class BookItemWidget extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              book!.title,
+              book.title,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
-                color: (book!.isHQ != null && book!.isHQ!)
+                color: (book.isHQ != null && book.isHQ!)
                     ? Colors.yellow[300]
                     : Colors.purple[300],
               ),
@@ -182,7 +182,7 @@ class BookItemWidget extends StatelessWidget {
             ),
             //Author
             Text(
-              book!.author,
+              book.author,
               style: TextStyle(
                 fontSize: 10,
                 fontStyle: FontStyle.italic,
@@ -196,12 +196,12 @@ class BookItemWidget extends StatelessWidget {
             ),
             //Other Information
             Text(
-              (book!.daysToFinish != 0)
-                  ? book!.pages.toString() +
-                      " páginas em\n(${convertDate(book!.startedLecture)})" +
-                      " + ${book!.daysToFinish.toString()} dias"
-                  : book!.pages.toString() +
-                      " páginas em\n(${convertDate(book!.startedLecture)})",
+              (book.daysToFinish != null || book.finishedLecture != null)
+                  ? book.pages.toString() +
+                      " páginas em\n(${convertDate(book.startedLecture)})" +
+                      " + ${calculateDays()} dias"
+                  : book.pages.toString() +
+                      " páginas em\n(${convertDate(book.startedLecture)})",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
@@ -212,5 +212,21 @@ class BookItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String calculateDays() {
+    if (book.finishedLecture != null) {
+      return book.startedLecture
+          .difference(book.finishedLecture!)
+          .inDays
+          .abs()
+          .toString();
+    } else {
+      if (book.daysToFinish != null) {
+        return book.daysToFinish.toString();
+      }
+    }
+
+    return "A";
   }
 }

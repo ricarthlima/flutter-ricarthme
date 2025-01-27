@@ -2,13 +2,13 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ricarth_flutter/ui/screens/books_screen.dart';
+import 'package:ricarth_flutter/books/books_screen.dart';
 import 'package:ricarth_flutter/ui/professional_page.dart';
 import 'package:ricarth_flutter/values/list_books.dart';
 import 'package:ricarth_flutter/values/my_colors.dart';
 
 import 'firebase_options.dart';
-import 'models/book_item.dart';
+import 'books/models/book_item.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
