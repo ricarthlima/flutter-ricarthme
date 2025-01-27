@@ -43,24 +43,19 @@ class BookItemWidget extends StatelessWidget {
                 Image.network(
                   book.urlImage,
                   height: 200,
-                  //cacheHeight: 200,
+                  color: (isBacklog) ? Colors.black.withAlpha(200) : null,
+                  colorBlendMode: BlendMode.multiply,
                 ),
                 Align(
-                  alignment: Alignment.bottomCenter,
+                  alignment: Alignment.topCenter,
                   child: Visibility(
                     visible: isBacklog,
-                    child: Container(
-                      width: 92,
-                      height: 24,
-                      decoration: BoxDecoration(color: Colors.red[900]),
-                      child: Center(
-                        child: Text(
-                          "BACKLOG",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                    child: Text(
+                      "LENDO",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
                     ),
                   ),
@@ -174,9 +169,11 @@ class BookItemWidget extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
-                color: (book.isHQ != null && book.isHQ!)
-                    ? Colors.yellow[300]
-                    : Colors.purple[300],
+                color: (isBacklog)
+                    ? Colors.blueGrey
+                    : (book.isHQ != null && book.isHQ!)
+                        ? Colors.yellow[300]
+                        : Colors.purple[300],
               ),
               textAlign: TextAlign.center,
             ),

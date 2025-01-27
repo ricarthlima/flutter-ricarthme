@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ricarth_flutter/helpers/responsive_values.dart';
@@ -21,6 +20,7 @@ class _BooksScreenState extends State<BooksScreen> {
   AuthService authService = AuthService();
 
   bool isShowingHQs = false;
+  bool isShowingWip = false;
 
   @override
   void initState() {
@@ -108,30 +108,41 @@ class _BooksScreenState extends State<BooksScreen> {
                 ),
               ),
               SizedBox(height: 16),
-              Row(
-                children: [
-                  Checkbox(
-                    value: isShowingHQs,
-                    activeColor: Colors.purple,
-                    onChanged: (value) {
-                      setState(() {
-                        isShowingHQs = !isShowingHQs;
-                      });
-                    },
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    "Mostrar HQs",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+              SizedBox(
+                width: min(400, MediaQuery.of(context).size.width),
+                child: SwitchListTile(
+                  value: isShowingHQs,
+                  title: Text("Mostrar HQs"),
+                  contentPadding: EdgeInsets.zero,
+                  onChanged: (value) {
+                    setState(() {
+                      isShowingHQs = !isShowingHQs;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(height: 16),
+              SizedBox(
+                width: min(400, MediaQuery.of(context).size.width),
+                child: SwitchListTile(
+                  value: isShowingWip,
+                  contentPadding: EdgeInsets.zero,
+                  title: Text("Mostrar leituras em andamento"),
+                  onChanged: (value) {
+                    setState(() {
+                      isShowingWip = !isShowingWip;
+                    });
+                  },
+                ),
               ),
               SizedBox(height: 16),
               Center(
-                child: Wrap(
-                  runSpacing: 50,
-                  children: _generateWidgets(),
-                ),
+                child: (listBook.isEmpty)
+                    ? CircularProgressIndicator()
+                    : Wrap(
+                        runSpacing: 50,
+                        children: _generateWidgets(),
+                      ),
               ),
             ],
           ),
@@ -184,9 +195,6 @@ class _BooksScreenState extends State<BooksScreen> {
       if (listBook[i].daysToFinish == null &&
           listBook[i].finishedLecture == null) {
         isBacklog = true;
-        if (FirebaseAuth.instance.currentUser == null) {
-          addItem = false;
-        }
       }
 
       if (listBook[i].finishedLecture != null) {
@@ -255,6 +263,10 @@ class _BooksScreenState extends State<BooksScreen> {
         }
       } else {
         addItem = true;
+      }
+
+      if (isBacklog && !isShowingWip) {
+        addItem = false;
       }
 
       if (addItem) {
